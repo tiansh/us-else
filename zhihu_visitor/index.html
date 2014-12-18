@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+  <title>知乎免登录</title>
+  <meta name="keywords" content="知乎, ZhiHu, 登录, 注册, 答案, 全文" />
+  <meta name="description" content="ZhiHu Visitor 知乎免登录 查看知乎答案全文而无需登录注册" />
+  <style>
+    html, body { font-family: "Microsoft YaHei",Helvetica,Arial,sans-serif; font-size: 16px; font-weight: normal; line-height: 24px; margin: 0; padding: 0; }
+    body { background: #eef2f5; padding-bottom: 40px; }
+    #main-body { width: 960px; margin: 0 auto; }
+    h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+    a, a:hover, a:active, a:visited { text-decoration: none; color: #026b76; outline: none; }
+    a img { border: none; }
+    #background { width: 100%; height: 400px; margin-bottom: -400px; background: #037ad8; }
+    header { display: block; height: 400px; width: 100%; }
+    header ::selection { background: white; color: #037ad8; }
+    header ::-moz-selection { background: white; color: #298bd8; }
+    h1 { color: #ffffff; font-size: 48px; line-height: 60px; margin: 0; padding: 120px 100px 0; font-weight: bold; }
+    h2 { line-height: 30px; font-size: 24px; margin: 40px 0 0 100px; font-weight: bold; color: #ffffff; font-weight: normal; }
+    #install { background: #80c3f7; border: 1px solid #1d80cf; border-radius: 5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 1px rgba(50, 50, 50, 0.05); color: #fff; cursor: pointer; display: block; font-size: 28px; line-height: 58px; outline: 0 none; padding: 0 15px; text-align: center; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); width: 300px; margin: -60px 100px 0; float: right; }
+    #install:active { border: 1px solid #0971c5; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1); color: #eee; }
+    #report { float: right; width: 400px; height: 70px; padding: 0; display: block; font-size: 16px; text-align: right; margin: 0 100px; }
+    #report a { color: #fff; }
+    h3 { font-size: 24px; font-weight: bold; border-bottom: 2px #ccc solid; padding: 10px 20px 10px 10px; margin: 20px 0 10px; color: #333; }
+    .in { padding: 5px 2em; border: 4px; }
+  </style>
+</head>
+<body>
+  <div id="background"></div>
+  <div id="main-body">
+
+    <header>
+      <h1>知乎免登录</h1>
+      <h2>查看答案全文而无需注册登录</h2>
+      <a id="install" href="Zhihu_Visitor.user.js">安装脚本</a>
+      <div id="report">
+        <a href="https://github.com/tiansh/us-else/issues" target="_blank">报告Bug</a>
+      </div>
+    </header>
+
+    <h3>功能</h3>
+    <div class="in">
+      <div class="p">
+        知乎问题页面里，比较长的答案添加展开按钮，点击可以显示全文。<br />
+        隐藏了必须登录才能使用的相关功能的按钮，如点赞或收藏等。
+      </div>
+    </div>
+
+    <h3>浏览器兼容性</h3>
+    <div class="in">
+      <div class="p">
+        本脚本可以在以下浏览器上运行：<br />
+        <strong><a href="http://www.mozilla.org/en-US/firefox/all/#zh-CN">Firefox浏览器</a> + <a href="https://addons.mozilla.org/zh-CN/firefox/addon/greasemonkey/">GreaseMonkey附加组件</a> （建议）</strong><br />
+        <a href="https://www.google.com/intl/zh-CN/chrome/browser/?standalone=1">Chrome浏览器</a> + <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=zh-CN">TamperMonkey扩展程序</a><br />
+        <a href="http://www.opera.com/zh-cn">Opera浏览器</a> + <a href="https://addons.opera.com/zh-cn/extensions/details/tampermonkey-beta/">TamperMonkey Beta扩展</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
