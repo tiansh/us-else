@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
   <title>知乎免登录</title>
   <meta name="keywords" content="知乎, ZhiHu, 登录, 注册, 答案, 全文" />
-  <meta name="description" content="ZhiHu Visitor 知乎免登录 查看知乎答案全文而无需登录注册" />
+  <meta name="description" content="ZhiHu Visitor 知乎免登录 查看完整的回答而无需注册登录" />
   <style>
     html, body { font-family: "Microsoft YaHei",Helvetica,Arial,sans-serif; font-size: 16px; font-weight: normal; line-height: 24px; margin: 0; padding: 0; }
     body { background: #eef2f5; padding-bottom: 40px; }
@@ -33,10 +33,10 @@
 
     <header>
       <h1>知乎免登录</h1>
-      <h2>查看答案全文而无需注册登录</h2>
+      <h2>查看完整的回答而无需注册登录</h2>
       <a id="install" href="Zhihu_Visitor.user.js">安装脚本</a>
       <div id="report">
-        <a href="https://github.com/tiansh/us-else/issues" target="_blank">报告Bug</a>
+        <a href="https://github.com/tiansh/us-else/issues" target="_blank">报告错误</a>
       </div>
     </header>
 
@@ -44,8 +44,18 @@
     <div class="in">
       <div class="p">
         知乎问题页面里，比较长的答案添加展开按钮，点击可以显示全文。<br />
+        点击“更多回答”可以加载更多回答而非登录框。<br />
         隐藏了必须登录才能使用的相关功能的按钮，如点赞或收藏等。
       </div>
+    </div>
+
+    <h3>已知问题</h3>
+    <div class="in">
+      <ul>
+        <li>回答中的大图无法在当前页显示原图，会在新页打开原图</li>
+        <li>第二页的回答的评论无法在当前页面展开，只能打开该条回答所属的页面后再手动展开。</li>
+      </ul>
+      <div class="p">如果您有好的解决方法欢迎在<a href="https://github.com/tiansh/us-else/issues" target="_blank">反馈页面</a>告诉我或直接创建拉取请求。</div>
     </div>
 
     <h3>浏览器兼容性</h3>
