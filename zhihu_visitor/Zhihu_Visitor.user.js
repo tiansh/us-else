@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @namespace         https://github.com/tiansh
 // @name              Zhihu Visitor
 // @name:en           Zhihu Visitor
@@ -13,7 +13,7 @@
 // @downloadURL       http://tiansh.github.io/us-else/zhihu_visitor/Zhihu_Visitor.user.js
 // @homepageURL       http://tiansh.github.io/us-else/zhihu_visitor/
 // @supportURL        https://github.com/tiansh/us-else/issues/
-// @version           2.0
+// @version           2.1
 // @grant             GM_addStyle
 // @grant             GM_xmlhttpRequest
 // ==/UserScript==
@@ -31,7 +31,7 @@ var matches = (function () {
 // 隐藏掉会员功能按钮
 var hideNeedLogin = function () {
   GM_addStyle(function () { /*!
-    .zm-votebar .label, .zm-votebar .vote-arrow, .zm-votebar .down { display: none; }
+    .zm-votebar .label, .zm-votebar .vote-arrow, .zm-votebar .down, .zm-comment-form { display: none; }
     .zm-votebar .count { top: 8px; }
     .zm-votebar .up { height: 40px; }
     .zm-votebar .up, .zm-votebar .down { cursor: auto; }
@@ -108,6 +108,21 @@ var noMoreAnswer = function () {
   button.style.display = 'none';
 };
 
+// 显示评论
+var showComment = function (ans) {
+  var id = ans.getAttribute('data-aid');
+  var metaPanel = ans.querySelector('.zm-meta-panel');
+  metaPanel.className = 'zm-meta-panel goog-scrollfloater focusin';
+  var commentBox = document.createElement('div');
+  commentBox.innerHTML = '<div class="zm-comment-box" style=""><i class="icon icon-spike zm-comment-bubble"></i><div class="zm-comment-spinner">正在加载，请稍等 <i class="spinner-lightgray"></i></div></div>';
+  commentBox = metaPanel.parentNode.insertBefore(commentBox.firstChild, metaPanel.nextSibling);
+  GM_xmlhttpRequest({
+    'method': 'GET',
+    'url': 'http://www.zhihu.com/node/AnswerCommentBoxV2?params={%22answer_id%22%3A%22' + id + '%22%2C%22load_all%22%3Afalse}',
+    'onload': function (resp) { commentBox.outerHTML = resp.responseText; },
+  });
+};
+
 // 显示回答时修复回答中的一些链接什么的
 var fixAnswer = function (ans) {
   // 解决图片延迟加载问题
@@ -115,10 +130,10 @@ var fixAnswer = function (ans) {
   Array.prototype.forEach.call(imgs, function (img) {
     img.setAttribute('src', img.getAttribute('data-actualsrc'));
   });
-  // FIXME 评论打不开，所以就提供打开回答页面了，多点一下虽然不太好，但是至少还能用
+  // 解决评论按钮无法展开的问题
   var page = ans.querySelector('.answer-date-link').href;
   var cmt = ans.querySelector('.toggle-comment');
-  cmt.href = page; cmt.target = '_blank';
+  cmt.addEventListener('click', showComment.bind(null, ans));
   // 最后修复手动展开的问题（和一开始就有的回答一样）
   expandAnswer(ans.querySelector('.fixed-summary'));
 };
@@ -180,7 +195,7 @@ var showMoreButton = function () {
 };
 
 // 恢复显示原图功能
-// FIXME 网站原本可以在当前页查看图片的，而且邮件点击也可以在当前页显示
+// FIXME 网站原本可以在当前页查看图片的，而且右键点击也可以在当前页显示
 //       现在为了避免左击出登录框所以干脆新页面打开了
 var showLargeImage = function () {
   document.body.addEventListener('click', function (e) {
