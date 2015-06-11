@@ -6,6 +6,10 @@
 
 知乎免登录查看回答全文
 
+# Zhihu Shorter #
+
+（知乎）我讨厌长篇大论
+
 # SJTU SE e-Learning Plus #
 
 e-Learning的一些改进。（公开版）
