@@ -8,7 +8,7 @@
 // @downloadURL http://tiansh.github.io/us-else/zhihu_shorter/Zhihu_Shorter.user.js
 // @homepageURL http://tiansh.github.io/us-else/zhihu_shorter/
 // @supportURL  https://github.com/tiansh/us-else/issues/
-// @version     1.0
+// @version     1.1
 // @copyright   田生; Copyright (c) All Rights Reserved
 // @grant       GM_addStyle
 // @grant       GM_xmlhttpRequest

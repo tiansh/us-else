@@ -8,7 +8,7 @@
 // @downloadURL http://tiansh.github.io/us-else/zhihu_shorter/Zhihu_Shorter.user.js
 // @homepageURL http://tiansh.github.io/us-else/zhihu_shorter/
 // @supportURL  https://github.com/tiansh/us-else/issues/
-// @version     1.0
+// @version     1.1
 // @copyright   田生; Copyright (c) All Rights Reserved
 // @grant       GM_addStyle
 // @grant       GM_xmlhttpRequest
@@ -34,6 +34,47 @@ var param = function (data) {
   return Object.keys(data).map(function (k) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
   }).join('&');
+};
+
+// 显示评论
+var showComment = function (ans) {
+  var id = ans.getAttribute('data-aid');
+  var metaPanel = ans.querySelector('.zm-meta-panel');
+  metaPanel.className = 'zm-meta-panel goog-scrollfloater focusin';
+  var commentBox = document.createElement('div');
+  commentBox.innerHTML = '<div class="zm-comment-box" style=""><i class="icon icon-spike zm-comment-bubble"></i><div class="zm-comment-spinner">正在加载，请稍等 <i class="spinner-lightgray"></i></div></div>';
+  commentBox = metaPanel.parentNode.insertBefore(commentBox.firstChild, metaPanel.nextSibling);
+  GM_xmlhttpRequest({
+    'method': 'GET',
+    'url': 'http://www.zhihu.com/node/AnswerCommentBoxV2?params={%22answer_id%22%3A%22' + id + '%22%2C%22load_all%22%3Afalse}',
+    'onload': function (resp) { commentBox.outerHTML = resp.responseText; },
+  });
+};
+
+// 显示回答时修复回答中的一些链接什么的
+var fixAnswer = function (ans) {
+  // 解决图片延迟加载问题
+  var imgs = ans.querySelectorAll('img[data-actualsrc]');
+  Array.prototype.forEach.call(imgs, function (img) {
+    img.setAttribute('src', img.getAttribute('data-actualsrc'));
+  });
+  // 解决评论按钮无法展开的问题
+  var page = ans.querySelector('.answer-date-link').href;
+  var cmt = ans.querySelector('.toggle-comment');
+  cmt.addEventListener('click', showComment.bind(null, ans));
+};
+
+
+// 显示某条回答
+var showAnswer = function (ans) {
+  var lastAnswer = document.querySelectorAll('.zm-item-answer');
+  lastAnswer = lastAnswer[lastAnswer.length - 1];
+  var ref = lastAnswer.nextSibling;
+  var newAnswerWrap = document.createElement('div');
+  newAnswerWrap.innerHTML = ans;
+  var newAnswer = newAnswerWrap.firstChild;
+  fixAnswer(newAnswer);
+  ref.parentNode.insertBefore(newAnswer, ref);
 };
 
 // 显示更多回答
