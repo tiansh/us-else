@@ -43,6 +43,9 @@
     <h3>安装脚本</h3>
     <div class="in">
       <div class="p">
+        如果需要在未登录的情况下使用本脚本，建议安装<a href="../zhihu_visitor/">知乎免登录脚本</a>以获得更好的效果！
+      </div>
+      <div class="p">
         <iframe id="guide" height="0" style="display: block;width: 100%; border: none;" src="https://tiansh.github.io/us-guide/install.html#name=知乎短答案&installurl=https://tiansh.github.io/us-else/zhihu_shorter/Zhihu_Shorter.user.js&description=我讨厌长篇大论&author=tiansh&supporturl=https://github.com/tiansh/us-else/issues&homepageurl=https://tiansh.github.io/us-else/zhihu_shorter/&compatible=firefox+greasemonkey&color=#EEF2F5,#000,#026B76,#298BD8,#fff"></iframe>
         <script>window.addEventListener('message', function (e) { if (e.origin === 'https://tiansh.github.io') try { document.getElementById('guide').height = JSON.parse(e.data).installheight } catch (ex) { } }, false);</script>
       </div>
@@ -51,19 +54,9 @@
     <h3>功能</h3>
     <div class="in">
       <div class="p">
-        优化知乎答案的排列顺序：<br />
-        本来打算按照 （赞同 - 反对）/字数 的，结果拿不到反对数量。<br />
-        所以修正公式，令 反对 := 赞同 - 1 。<br />
-        测试表明，优化后的排序相比优化前，在前 1 分钟的查看答案过程中可以找到的有效信息，提高了40% 。
+        自动显示知乎的更多答案<br />
+        优化知乎答案的排列顺序：按字数从少到多排序<br />
       </div>
-    </div>
-
-    <h3>已知问题</h3>
-    <div class="in">
-      <ul>
-        <li>答案很多的话打开会卡一小会儿，因为只能先加载全部答案……</li>
-      </ul>
-      <div class="p">如果您有好的解决方法欢迎在<a href="https://github.com/tiansh/us-else/issues" target="_blank">反馈页面</a>告诉我或直接创建拉取请求。</div>
     </div>
 
   </div>
