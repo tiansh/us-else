@@ -13,15 +13,16 @@
 // @noframes
 // @compatible     firefox
 // @license        MPL 2.0
+// @author         田生
 // @copyright      田生; https://github.com/tiansh
 // @grant          GM_getValue
 // @grant          GM_setValue
 // ==/UserScript==
 
-(function () {
+(function mina() {
   
   if (!('contextMenu' in document.createElement('div'))) alert('抱歉，微信快捷回复脚本不支持您的浏览器！');
-  if (!document.querySelector('#chat')) return;
+  if (!document.querySelector('#chat')) setTimeout(mina, 10);
 
   const menu = ((() => {
     const container = document.createElement('div');
