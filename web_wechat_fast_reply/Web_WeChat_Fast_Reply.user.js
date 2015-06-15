@@ -9,7 +9,7 @@
 // @updateURL      https://tiansh.github.io/us-else/web_wechat_fast_reply/Web_WeChat_Fast_Reply.meta.js
 // @supportURL     https://github.com/tiansh/us-else/issues
 // @homepageURL    https://tiansh.github.io/us-else/web_wechat_fast_reply/
-// @version        1.0
+// @version        1.1
 // @noframes
 // @compatible     firefox
 // @license        MPL 2.0
@@ -31,10 +31,7 @@
   })());
   
   const items = {
-    data: ((() => {
-      try { return Array.from(JSON.parse(GM_getValue('text', '[]'))) }
-      catch (_) { return []; }
-    })()),
+    data: [],
     _add(text) {
       if (!text) return;
       this._remove(text);
@@ -61,25 +58,31 @@
     update() {
       GM_setValue('text', JSON.stringify(this.data));
       
-      const item = (r, t, f) => {
+      const item = (r, t, i, f) => {
         const x = document.createElement(f ? 'menuitem' : 'menu');
-        x.label = t;
+        x.label = (Number.isInteger(i) && i < 10 ? '' + (i + 1) % 10 + ': ' : '') + t;
         if (f) x.addEventListener('click', f.bind(this, t));
         return r.appendChild(x);
       };
-      const all = (r, f) => this.data.map(t => item(r, t, f));
+      const all = (r, f) => this.data.map((t, i) => item(r, t, i, f));
       
       menu.innerHTML = '';
       
       all(menu, this.act);
-      item(menu, '添加快捷回复', this.add);
+      item(menu, '添加快捷回复', undefined, this.add);
       all(item(menu, '删除快捷回复'), this.remove);
+    },
+    init() {
+      try {
+        this.data = Array.from(JSON.parse(GM_getValue('text', '[]')))
+      } catch (_) { }
+      this.update();
     }
   };
   
   const chat = document.querySelector('#chat');
   chat.setAttribute('contextmenu', 'wechat-fast-input-menu');
-  items.update();
+  items.init();
 
 }());
 

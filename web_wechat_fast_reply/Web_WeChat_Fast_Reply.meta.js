@@ -9,7 +9,7 @@
 // @updateURL      https://tiansh.github.io/us-else/web_wechat_fast_reply/Web_WeChat_Fast_Reply.meta.js
 // @supportURL     https://github.com/tiansh/us-else/issues
 // @homepageURL    https://tiansh.github.io/us-else/web_wechat_fast_reply/
-// @version        1.0
+// @version        1.1
 // @noframes
 // @compatible     firefox
 // @license        MPL 2.0
