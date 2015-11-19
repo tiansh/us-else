@@ -13,7 +13,7 @@
 // @downloadURL       https://tiansh.github.io/us-else/zhihu_visitor/Zhihu_Visitor.user.js
 // @homepageURL       https://tiansh.github.io/us-else/zhihu_visitor/
 // @supportURL        https://github.com/tiansh/us-else/issues/
-// @version           3.1
+// @version           3.2
 // @grant             GM_addStyle
 // @grant             GM_xmlhttpRequest
 // ==/UserScript==

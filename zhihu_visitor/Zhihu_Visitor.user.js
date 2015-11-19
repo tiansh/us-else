@@ -13,7 +13,7 @@
 // @downloadURL       https://tiansh.github.io/us-else/zhihu_visitor/Zhihu_Visitor.user.js
 // @homepageURL       https://tiansh.github.io/us-else/zhihu_visitor/
 // @supportURL        https://github.com/tiansh/us-else/issues/
-// @version           3.1
+// @version           3.2
 // @grant             GM_addStyle
 // @grant             GM_xmlhttpRequest
 // ==/UserScript==
@@ -66,7 +66,7 @@ var mina = function () {
     .feed-item .zm-votebar { display: block; }
     .zm-votebar::after { content: " "; height: 40px; width: 38px; display: block; margin-top: -40px; position: relative; }
     // 回答下的按钮，感谢、没有帮助等
-    .meta-item[name="thanks"], .meta-item[name="share"], .meta-item[name="favo"], .meta-item[name="nohelp"], .meta-item[name="report"], .zm-meta-panel > .zg-bull { display: none; }
+    .meta-item[name="thanks"], .meta-item[name="share"], .meta-item[name="favo"], .meta-item[name="nohelp"], .meta-item[name="report"], .zm-meta-panel > .zg-bull { display: none !important; }
     // 原生的显示全部按钮
     .toggle-expand { display: none !important; }
     // “更多”按钮按下时的样式
@@ -75,16 +75,8 @@ var mina = function () {
     .zh-profile-card.member .operation,
     .zh-profile-card.topic .operation,
     #zh-question-side-header-wrap .follow-button { display: none; }
-    // 自定义的展开按钮，忽略单条回答页面的那条
-    .zh-question-answer-wrapper:not(.autohide-false) .fixed-summary.fixed-summary-show,
-    .awesome-answer-list .fixed-summary.fixed-summary-show
-    { max-height: none; height: auto; overflow: visible; cursor: auto; }
-    .zh-question-answer-wrapper:not(.autohide-false) .fixed-summary.fixed-summary-toshow .origin_image,
-    .awesome-answer-list .fixed-summary.fixed-summary-toshow .origin_image
-    { cursor: pointer; }
-    .zh-question-answer-wrapper:not(.autohide-false) .fixed-summary.fixed-summary-toshow::after,
-    .awesome-answer-list .fixed-summary.fixed-summary-toshow::after
-    { content: "▼ 更多 　"; background: #eee; width: 100%; height: 20px; line-height: 20px; text-align: center; color: #777; position: absolute; top: calc(10em - 20px); }
+    // 长答案
+    .zh-summary + .zm-editable-content { display: block !important; }
   */ }.toString().replace(/\r\n|\r/g, '\n').replace(/\n\s*\/\/.*\n/g, '\n').replace(/(^.*\n)|(\n.*$)/g, ''));
 
   // 自动处理回答
@@ -92,8 +84,8 @@ var mina = function () {
     var handlers = [];
     var observe = function () {
       var fixed = [].slice.call(document.querySelectorAll([
-        '.zm-item-answer + .zm-item-answer .fixed-summary:not([zvhfs])',
-        '.awesome-answer-list .fixed-summary:not([zvhfs])'
+        '.zm-item-answer + .zm-item-answer .zm-item-rich-text:not([zvhfs])',
+        '.awesome-answer-list .zm-item-rich-text:not([zvhfs])'
       ].join(',')), 0);
       fixed.forEach(function (item) {
         item.setAttribute('zvhfs', '');
@@ -123,16 +115,6 @@ var mina = function () {
     };
   }());
 
-  // 点击之后展开显示回答全文
-  handleClick('.fixed-summary-toshow, .fixed-summary-toshow *', function (e) {
-    var fixed = parent(e.target, '.fixed-summary-toshow');
-    fixed.classList.remove('fixed-summary-toshow');
-    fixed.classList.add('fixed-summary-show');
-  });
-
-  // 阻止点击时弹出“登录”框
-  handleClick('.fixed-summary-show, .fix-summary-show :not(.origin_image)', function hideNeedLogin() { });
-
   // 显示回答的评论
   handleClick(['.zh-question-answer-wrapper:not(.autohide-false) .zm-item-answer[data-aid] .toggle-comment',
     '.awesome-answer-list .zm-item-answer[data-aid] .toggle-comment'].join(','),
@@ -160,18 +142,6 @@ var mina = function () {
         }
       },
     });
-  });
-
-  // 初始化某条的展开
-  fixAnswers(function showFullAnswer(fixed) {
-    var height = fixed.clientHeight;
-    fixed.classList.add('fixed-summary-show');
-    fixed.classList.add('fixed-summary-expand');
-    setTimeout(function () {
-      if (fixed.clientHeight === height) return;
-      fixed.classList.remove('fixed-summary-show');
-      fixed.classList.add('fixed-summary-toshow');
-    }, 0);
   });
 
   // 显示回答时修复回答中的一些链接什么的
