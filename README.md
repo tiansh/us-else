@@ -10,9 +10,9 @@
 
 （知乎）我讨厌长篇大论
 
-# Web WeChat Fast Reply #
+# Weibo Music Download Tool #
 
-网页微信快捷回复
+下载微博音乐
 
 # SJTU SE e-Learning Plus #
 
