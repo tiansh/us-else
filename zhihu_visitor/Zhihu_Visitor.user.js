@@ -8,14 +8,15 @@
 // @description:en    View zhihu.com answers without sign in
 // @description:zh    知乎免登录查看回答全文并显示更多回答
 // @description:zh-CN 知乎免登录查看回答全文并显示更多回答
-// @include           http://www.zhihu.com/*
+// @include           *://www.zhihu.com/*
 // @updateURL         https://tiansh.github.io/us-else/zhihu_visitor/Zhihu_Visitor.meta.js
 // @downloadURL       https://tiansh.github.io/us-else/zhihu_visitor/Zhihu_Visitor.user.js
 // @homepageURL       https://tiansh.github.io/us-else/zhihu_visitor/
 // @supportURL        https://github.com/tiansh/us-else/issues/
-// @version           3.2
+// @version           3.3
 // @grant             GM_addStyle
 // @grant             GM_xmlhttpRequest
+// @connect-src       www.zhihu.com
 // ==/UserScript==
 
 var mina = function () {
@@ -132,7 +133,7 @@ var mina = function () {
     commentBox = metaPanel.parentNode.insertBefore(commentBox.firstChild, metaPanel.nextSibling);
     GM_xmlhttpRequest({
       'method': 'GET',
-      'url': 'http://www.zhihu.com/node/AnswerCommentBoxV2?params={%22answer_id%22%3A%22' + id + '%22%2C%22load_all%22%3Afalse}',
+      'url': location.protocol + '//www.zhihu.com/node/AnswerCommentBoxV2?params={%22answer_id%22%3A%22' + id + '%22%2C%22load_all%22%3Afalse}',
       'onload': function (resp) {
         commentBox.outerHTML = resp.responseText;
         var loadmore = ans.querySelector('.load-more');
@@ -204,7 +205,7 @@ var mina = function () {
 
       GM_xmlhttpRequest({
         'method': 'POST',
-        'url': 'http://www.zhihu.com/node/QuestionAnswerListV2',
+        'url': location.protocol + '//www.zhihu.com/node/QuestionAnswerListV2',
         'headers': {
           'Referer': location.href,
           'Content-Type': 'application/x-www-form-urlencoded',
