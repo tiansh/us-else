@@ -3,15 +3,16 @@
 // @name:zh-cn  知乎短答案
 // @description 我讨厌长篇大论
 // @namespace   https://github.com/tiansh
-// @include     http://www.zhihu.com/*
+// @include     *://www.zhihu.com/*
 // @updateURL   https://tiansh.github.io/us-else/zhihu_shorter/Zhihu_Shorter.meta.js
 // @downloadURL https://tiansh.github.io/us-else/zhihu_shorter/Zhihu_Shorter.user.js
 // @homepageURL https://tiansh.github.io/us-else/zhihu_shorter/
 // @supportURL  https://github.com/tiansh/us-else/issues/
-// @version     2.0
+// @version     2.1
 // @copyright   田生; Copyright (c) All Rights Reserved
 // @grant       GM_addStyle
 // @grant       GM_xmlhttpRequest
+// @connect-src www.zhihu.com
 // ==/UserScript==
 
 /**!
@@ -78,7 +79,7 @@ var showMoreWOLoginBase = (function () {
 
     GM_xmlhttpRequest({
       'method': 'POST',
-      'url': 'http://www.zhihu.com/node/QuestionAnswerListV2',
+      'url': location.protocol + '//www.zhihu.com/node/QuestionAnswerListV2',
       'headers': {
         'Referer': location.href,
         'Content-Type': 'application/x-www-form-urlencoded',
